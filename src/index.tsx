@@ -1,10 +1,13 @@
 import { Auth0Provider } from '@auth0/auth0-react';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 
+import App from 'app';
 import auth0Config from 'config/auth0.json';
+import { AppProvider } from 'providers';
 import reportWebVitals from 'reportWebVitals';
-import history from "utils/history";
+import history from 'utils/history';
 
 const onRedirectCallback = (appState: any) => {
   history.push(
@@ -25,6 +28,11 @@ const auth0ProviderConfig = {
 root.render(
   <React.StrictMode>
     <Auth0Provider {...auth0ProviderConfig}>
+      <BrowserRouter>
+        <AppProvider>
+          <App />
+        </AppProvider>
+      </BrowserRouter>
     </Auth0Provider>
   </React.StrictMode>
 );
