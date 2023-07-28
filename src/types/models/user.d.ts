@@ -1,4 +1,13 @@
 declare global {
+  interface GoogleUser {
+    email: string,
+    firstName: string | undefined,
+    lastName: string | undefined,
+    picture: string | undefined,
+    sub: string | undefined,
+    updatedAt: string | undefined,
+  };
+
   interface User {
     id: string,
     firstName: string,
@@ -6,6 +15,7 @@ declare global {
     avatar: string,
     email: string,
     points: number,
+    updatedAt: string,
   };
 };
 
