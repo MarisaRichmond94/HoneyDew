@@ -1,9 +1,8 @@
 @import 'global.scss';
 
 #loading-container {
-  align-items: center;
+  @include vertically-centered-flex-box;
   color: $secondary-blue;
-  display: flex;
   flex-direction: column;
   font-size: $sub-header-font-size;
   height: 100vh;

@@ -1,0 +1,13 @@
+@import 'global.scss';
+
+#app-header {
+  @include vertically-centered-flex-box;
+  background-color: $black;
+  height: $header-height;
+  width: 100vw;
+
+  #header-logo {
+    height: $header-logo-height;
+    margin-left: $margin-15;
+  };
+};
