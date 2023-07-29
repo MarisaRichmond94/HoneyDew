@@ -1,16 +1,14 @@
-import { useAuth0 } from "@auth0/auth0-react";
-import { FC } from "react";
+import { FC } from 'react';
+
+import { Loading } from 'components';
+import { useAuth } from 'providers';
 
 const App: FC = () => {
-  const { isAuthenticated } = useAuth0();
+  const { isAuthenticated } = useAuth();
 
-  if (!isAuthenticated) return <div>Loading...</div>
+  if (!isAuthenticated) return <Loading />;
 
-  return (
-    <div id='page'>
-
-    </div>
-  )
+  return <div id='app-content'></div>;
 };
 
 export default App;

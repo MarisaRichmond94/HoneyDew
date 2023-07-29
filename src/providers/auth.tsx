@@ -4,6 +4,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import * as UsersApi from 'api/users';
 
 interface AuthContextProps {
+  isAuthenticated: boolean,
   user?: User,
   logout: () => void
 };
@@ -31,7 +32,8 @@ const AuthProvider = (props: object) => {
   useEffect(() => {
     const refreshUser = async (googleUser: GoogleUser) => {
       const refreshedUser = await UsersApi.get(googleUser);
-      setUser(refreshedUser);
+      // Fake latency so we can see our beautiful loading spinner
+      setTimeout(() => { setUser(refreshedUser); }, 2000);
     };
 
     if (!!googleUser && googleUser.email) {
@@ -53,6 +55,7 @@ const AuthProvider = (props: object) => {
   };
 
   const value = {
+    isAuthenticated: isAuthenticated && !!user,
     user,
     logout
   };

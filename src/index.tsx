@@ -1,4 +1,5 @@
 import 'global.scss';
+import '@fontsource/cooper-hewitt';
 
 import { Auth0Provider } from '@auth0/auth0-react';
 import React from 'react';
@@ -25,7 +26,7 @@ const auth0ProviderConfig = {
   authorizationParams: {
     redirect_uri: window.location.origin,
   }
-}
+};
 
 root.render(
   <React.StrictMode>

@@ -1,0 +1,19 @@
+@import 'global.scss';
+
+#loading-container {
+  align-items: center;
+  color: $secondary-blue;
+  display: flex;
+  flex-direction: column;
+  font-size: $sub-header-font-size;
+  height: 100vh;
+  margin: $no-margin;
+
+  #loading-icon {
+    margin-top: 30vh;
+  };
+
+  #loading-message {
+    margin-top: $margin-30;
+  };
+};
