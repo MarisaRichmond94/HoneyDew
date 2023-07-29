@@ -1,0 +1,10 @@
+@import '../variables/variables';
+
+body {
+  background-color: $primary-blue;
+  height: 100vh;
+  font-weight: 100;
+  margin: $no-margin;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+};
