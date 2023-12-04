@@ -13,6 +13,7 @@ const AuthContext = createContext<undefined | AuthContextProps>(undefined);
 
 const AuthProvider = (props: object) => {
   const {
+    getAccessTokenSilently,
     isAuthenticated,
     isLoading,
     loginWithRedirect,
@@ -30,24 +31,30 @@ const AuthProvider = (props: object) => {
   }, [isAuthenticated, isLoading, loginWithRedirect]);
 
   useEffect(() => {
-    const refreshUser = async (googleUser: GoogleUser) => {
-      const refreshedUser = await UsersApi.get(googleUser);
+    const refreshUser = async (userDto: FindOrCreateUserDTO) => {
+      const refreshedUser = await UsersApi.findOrCreate(userDto, getAccessTokenSilently, setUser);
       // Fake latency so we can see our beautiful loading spinner
       setTimeout(() => { setUser(refreshedUser); }, 2000);
     };
 
-    if (!!googleUser && googleUser.email) {
+    if (
+      !!googleUser &&
+      googleUser.email &&
+      googleUser.given_name &&
+      googleUser.family_name &&
+      googleUser.picture &&
+      googleUser.sub
+    ) {
       const {
         email,
         given_name: firstName,
         family_name: lastName,
-        picture,
-        sub,
-        updated_at: updatedAt,
+        picture: avatar,
+        sub: googleId,
       } = googleUser;
-      refreshUser({ email, firstName, lastName, picture, sub, updatedAt });
+      refreshUser({ email, firstName, lastName, avatar, googleId });
     }
-  }, [googleUser]);
+  }, [getAccessTokenSilently, googleUser]);
 
   const logout = () => {
     auth0Logout();

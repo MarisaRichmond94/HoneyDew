@@ -1,0 +1,84 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0001_create_and_populate_user_table_1
+      author: marisarichmond
+      comment: create users table
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: users
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: user_pkey
+              - column:
+                  name: first_name
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: avatar
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: google_id
+                  type: varchar
+                  constraints:
+                    nullable: false
+                    unique: true
+  - changeSet:
+      id: 0001_create_and_populate_user_table_2
+      author: marisarichmond
+      comment: populate users table with test user
+      changes:
+        - loadData:
+            file: data/user.csv
+            encoding: UTF-8
+            quotChar: '"'
+            separator: ;
+            tableName: users
+            relativeToChangelogFile: true
+            columns:
+              - column:
+                  header: id
+                  name: id
+                  type: uuid
+              - column:
+                  header: first_name
+                  name: first_name
+                  type: string
+              - column:
+                  header: last_name
+                  name: last_name
+                  type: string
+              - column:
+                  header: email
+                  name: email
+                  type: string
+              - column:
+                  header: avatar
+                  name: avatar
+                  type: string
+              - column:
+                  header: google_id
+                  name: google_id
+                  type: string

@@ -1,6 +1,19 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 
+import auth0Config from 'config/auth0.json';
 import { ApiMethod, ApiRoute } from 'enums';
+
+interface Headers {
+  headers: ApiHeaders
+}
+
+const buildHeaders = (accessToken?: string): Headers =>
+  ({
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      userId: window.localStorage.getItem('userId')
+    }
+  });
 
 interface ApiRequestOptions {
   method: ApiMethod,
@@ -18,7 +31,7 @@ const buildQueryString = (query: { [key: string]: any }): string => {
 };
 
 const buildUrl = (route: ApiRoute, id?: string, query?: { [key: string]: any }): string => {
-  let baseUrl = `${process.env.REACT_APP_BASE_SERVER_URL}/${route}`;
+  let baseUrl = `${process.env.REACT_APP_BASE_SERVER_URL}/api/private/${route}`;
   if (id) baseUrl = `${baseUrl}/${id}`;
   if (query) baseUrl = `${baseUrl}?${buildQueryString(query)}`;
 
@@ -28,33 +41,41 @@ const buildUrl = (route: ApiRoute, id?: string, query?: { [key: string]: any }):
 const makeRequest = async (
   url: string,
   method: ApiMethod,
+  headers?: { [key: string]: any },
   body?: { [key: string]: any },
 ): Promise<AxiosResponse> => {
   switch (method) {
     case ApiMethod.post:
-      return axios.post(url, body);
+      return axios.post(url, body, headers);
     case ApiMethod.patch:
-      return axios.patch(url, body);
+      return axios.patch(url, body, headers);
     case ApiMethod.delete:
     case ApiMethod.deleteById:
-      return axios.delete(url);
+      return axios.delete(url, headers);
     case ApiMethod.get:
     case ApiMethod.getById:
     default:
-      return axios.get(url);
+      return axios.get(url, headers);
   }
 };
 
 const isAxiosError = (error: any): error is AxiosError => error.isAxiosError === true;
 
 const makeApiRequest = async (
+  getAccessTokenSilently: (options?: TokenRequestProps) => Promise<string>,
   route: ApiRoute,
   options: ApiRequestOptions,
 ) => {
   const { method, id, body, query } = options;
 
   try {
-    const response = await makeRequest(buildUrl(route, id, query), method, body);
+    const headers = buildHeaders(
+      await getAccessTokenSilently({
+        audience: auth0Config.audience,
+        scope: 'read:current_user',
+      })
+    );
+    const response = await makeRequest(buildUrl(route, id, query), method, headers, body);
     if (route === ApiRoute.users) window.localStorage.setItem('userId', response?.data?.id);
     return response?.data;
   } catch (error: unknown) {
@@ -64,6 +85,7 @@ const makeApiRequest = async (
 };
 
 export {
+  buildHeaders,
   buildUrl,
   makeApiRequest,
   makeRequest,

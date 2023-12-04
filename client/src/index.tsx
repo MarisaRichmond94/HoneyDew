@@ -25,6 +25,7 @@ const auth0ProviderConfig = {
   onRedirectCallback,
   authorizationParams: {
     redirect_uri: window.location.origin,
+    audience: auth0Config.audience,
   }
 };
 
