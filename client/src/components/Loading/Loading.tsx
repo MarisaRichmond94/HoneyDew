@@ -1,4 +1,4 @@
-import './Loading.scss';
+import './loading.scss';
 
 import HashLoader from 'react-spinners/HashLoader';
 

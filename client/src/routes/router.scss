@@ -1,0 +1,5 @@
+@import 'global.scss';
+
+#content-container {
+  height: calc(100vh - ($header-height + $footer-height));
+}

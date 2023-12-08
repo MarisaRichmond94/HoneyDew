@@ -1,0 +1,35 @@
+@import 'global.scss';
+
+#app-footer {
+  background-color: $black;
+  bottom: 0;
+  height: $footer-height;
+  position: sticky;
+
+  #nav-container {
+    @include vertically-centered-flex-box;
+    justify-content: space-around;
+    padding: 0 $padding-10;
+  };
+
+  .nav-button {
+    height: $footer-height;
+    padding: $padding-15;
+
+    &.active,
+    &:hover {
+      color: $tertiary-blue;
+    };
+
+    &.active {
+      border-top: solid;
+      border-top-color: $tertiary-blue;
+      border-top-width: 3px;
+    };
+  };
+
+  img {
+    border-radius: 50%;
+    width: 50px;
+  };
+};

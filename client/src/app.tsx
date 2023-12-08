@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import { Loading } from 'components';
 import { useAuth } from 'providers';
-import { Header, Router } from 'routes';
+import { Footer, Header, Router } from 'routes';
 
 const App: FC = () => {
   const { isAuthenticated } = useAuth();
@@ -13,7 +13,7 @@ const App: FC = () => {
     <div id='app-content'>
       <Header />
       <Router />
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };

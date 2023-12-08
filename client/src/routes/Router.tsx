@@ -1,8 +1,10 @@
+import './router.scss';
+
 import { FC, useEffect } from 'react';
 import { useLocation, useNavigate, useRoutes } from 'react-router-dom';
 
 import { ROUTES } from 'settings';
-import DailyDewsPage from 'routes/dailyDews';
+import DailyDewsPage from 'routes/dews';
 
 const DAILY_DEWS_ROUTE = {
   path: ROUTES.dailyDewsRoute,

@@ -1,0 +1,134 @@
+@import 'global.scss';
+
+.hd-button {
+  // basic button styling
+  @include vertically-centered-flex-box;
+  border-style: solid;
+  box-shadow: none !important;
+  font-family: $paragraph-font-family;
+  outline: none !important;
+  padding: $padding-10 $padding-20;
+  cursor: pointer;
+  user-select: none;
+
+  // button color specific styling
+  &.primary-blue {
+    border-color: $primary-blue;
+    background-color: $primary-blue;
+    color: $white;
+    &:hover {
+      border-color: $secondary-blue;
+      background-color: $secondary-blue;
+    };
+  };
+  &.primary-green {
+    border-color: $primary-green;
+    background-color: $primary-green;
+    color: $white;
+    &:hover {
+      border-color: $secondary-green;
+      background-color: $secondary-green;
+    };
+  };
+  &.grey {
+    border-color: $grey;
+    background-color: $grey;
+    color: $white;
+    &:hover {
+      border-color: $light-grey;
+      background-color: $light-grey;
+    };
+  };
+  &.secondary-blue {
+    border-color: $secondary-blue;
+    background-color: $secondary-blue;
+    color: $white;
+    &:hover {
+      border-color: $grey;
+      background-color: $grey;
+    };
+  };
+  &.medium-grey {
+    border-color: $medium-grey;
+    background-color: $medium-grey;
+    color: $white;
+    &:hover {
+      border-color: $dark-grey;
+      background-color: $dark-grey;
+    };
+  };
+  &.off-black {
+    border-color: $off-black;
+    background-color: $off-black;
+    color: $white;
+    &:hover {
+      border-color: $medium-grey;
+      background-color: $medium-grey;
+    };
+  };
+  &.off-white {
+    border-color: $off-white;
+    background-color: $off-white;
+    color: $off-black;
+    &:hover {
+      border-color: $medium-grey;
+      background-color: $medium-grey;
+    };
+  };
+  &.transparent {
+    background-color: transparent !important;
+
+    &.primary-blue {
+      color: $primary-blue;
+      &:hover { color: $secondary-blue; };
+    };
+    &.primary-green {
+      color: $primary-green;
+      &:hover { color: $secondary-green; };
+    };
+    &.grey {
+      color: $grey;
+      &:hover { color: $light-grey; };
+    };
+    &.secondary-blue {
+      color: $secondary-blue;
+      &:hover { color: $grey; };
+    };
+    &.medium-grey {
+      color: $medium-grey;
+      &:hover { color: $dark-grey; };
+    };
+    &.off-black {
+      color: $off-black;
+      &:hover { color: $medium-grey; };
+    };
+    &.off-white {
+      color: $off-white;
+      &:hover { color: $medium-grey; };
+    };
+    &:disabled {
+      color: $disabled-grey;
+      &:hover { color: $disabled-grey; };;
+    };
+  };
+
+  // button type specific styling
+  &.icon {
+    border: none;
+    padding: $padding-5 $padding-10;
+  };
+  &.solid, &.outline { border-radius: $border-radius-8; };
+  &.pill, &.outlinepill {  border-radius: $border-radius-20; };
+  &.underline {
+    border: none;
+    border-bottom: solid 2px;
+    padding-bottom: $padding-5;
+  };
+
+  // button size specific styling
+  &.xs { font-size: $subtext-font-size; };
+  &.sm { font-size: $paragraph-font-size; };
+  &.md { font-size: $sub-header-font-size; };
+  &.lh { font-size: $header-font-size; };
+  &.xl { font-size: $title-font-size; };
+};
