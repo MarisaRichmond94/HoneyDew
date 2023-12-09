@@ -12,10 +12,11 @@ import { useAuth } from 'providers';
 import { ROUTES } from 'settings';
 
 interface NavButtonProps extends PropsWithChildren {
+  description: string,
   route: string,
 };
 
-const NavButton: FC<NavButtonProps> = ({ children, route }) => {
+const NavButton: FC<NavButtonProps> = ({ children, description, route }) => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const isActive = pathname === route;
@@ -28,6 +29,7 @@ const NavButton: FC<NavButtonProps> = ({ children, route }) => {
       type={ButtonType.icon}
     >
       {children}
+      <div className='nav-description'>{description}</div>
     </HDButton>
   );
 };
@@ -38,19 +40,19 @@ const Footer = () => {
   return (
     <div id='app-footer'>
       <div id='nav-container'>
-        <NavButton route={ROUTES.dailyDewsRoute}>
+        <NavButton description='Dew' route={ROUTES.dailyDewsRoute}>
           <HiSparkles />
         </NavButton>
-        <NavButton route={ROUTES.planRoute}>
+        <NavButton description='Plan' route={ROUTES.planRoute}>
           <TbTargetArrow />
         </NavButton>
-        <NavButton route={ROUTES.manageRoute}>
+        <NavButton description='Manage' route={ROUTES.manageRoute}>
           <PiStackFill />
         </NavButton>
-        <NavButton route={ROUTES.progressRoute}>
+        <NavButton description='Progress' route={ROUTES.progressRoute}>
           <GiProgression />
         </NavButton>
-        <NavButton route={ROUTES.profileRoute}>
+        <NavButton description='Profile' route={ROUTES.profileRoute}>
           <img alt='' src={user?.avatar} referrerPolicy='no-referrer' />
         </NavButton>
       </div>

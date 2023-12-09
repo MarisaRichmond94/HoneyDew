@@ -13,6 +13,9 @@
   };
 
   .nav-button {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
     height: $footer-height;
     padding: $padding-15;
 
@@ -26,10 +29,14 @@
       border-top-color: $tertiary-blue;
       border-top-width: 3px;
     };
-  };
 
-  img {
-    border-radius: 50%;
-    width: 50px;
+    .nav-description {
+      font-size: $subtext-font-size;
+    };
+
+    img {
+      border-radius: 50%;
+      width: 40px;
+    };
   };
 };
