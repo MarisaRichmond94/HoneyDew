@@ -1,11 +1,10 @@
 import { useAuth0 } from '@auth0/auth0-react';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect } from 'react';
 
-import * as UsersApi from 'api/users';
+import { useUser } from './user';
 
 interface AuthContextProps {
   isAuthenticated: boolean,
-  user?: User,
   logout: () => void
 };
 
@@ -13,15 +12,12 @@ const AuthContext = createContext<undefined | AuthContextProps>(undefined);
 
 const AuthProvider = (props: object) => {
   const {
-    getAccessTokenSilently,
     isAuthenticated,
     isLoading,
     loginWithRedirect,
     logout: auth0Logout,
-    user: googleUser,
   } = useAuth0();
-
-  const [user, setUser] = useState<undefined | User>();
+  const { user } = useUser();
 
   useEffect(() => {
     if (!isAuthenticated && !isLoading) {
@@ -30,32 +26,6 @@ const AuthProvider = (props: object) => {
     }
   }, [isAuthenticated, isLoading, loginWithRedirect]);
 
-  useEffect(() => {
-    const refreshUser = async (userDto: FindOrCreateUserDTO) => {
-      const refreshedUser = await UsersApi.findOrCreate(userDto, getAccessTokenSilently, setUser);
-      // Fake latency so we can see our beautiful loading spinner
-      setTimeout(() => { setUser(refreshedUser); }, 2000);
-    };
-
-    if (
-      !!googleUser &&
-      googleUser.email &&
-      googleUser.given_name &&
-      googleUser.family_name &&
-      googleUser.picture &&
-      googleUser.sub
-    ) {
-      const {
-        email,
-        given_name: firstName,
-        family_name: lastName,
-        picture: avatar,
-        sub: googleId,
-      } = googleUser;
-      refreshUser({ email, firstName, lastName, avatar, googleId });
-    }
-  }, [getAccessTokenSilently, googleUser]);
-
   const logout = () => {
     auth0Logout();
     localStorage.clear();
@@ -63,7 +33,6 @@ const AuthProvider = (props: object) => {
 
   const value = {
     isAuthenticated: isAuthenticated && !!user,
-    user,
     logout
   };
 

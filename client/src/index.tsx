@@ -8,7 +8,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import App from 'app';
 import auth0Config from 'config/auth0.json';
-import { AuthProvider } from 'providers';
+import { AuthProvider, UserProvider } from 'providers';
 import reportWebVitals from 'reportWebVitals';
 import history from 'utils/history';
 
@@ -33,9 +33,11 @@ root.render(
   <React.StrictMode>
     <Auth0Provider {...auth0ProviderConfig}>
       <BrowserRouter>
-        <AuthProvider>
-          <App />
-        </AuthProvider>
+        <UserProvider>
+          <AuthProvider>
+            <App />
+          </AuthProvider>
+        </UserProvider>
       </BrowserRouter>
     </Auth0Provider>
   </React.StrictMode>
