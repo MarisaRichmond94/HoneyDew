@@ -3,15 +3,15 @@ import { createContext, useContext, useEffect, useState } from 'react';
 
 import * as UsersApi from 'api/users';
 
-interface AuthContextProps {
+interface AppContextProps {
   isAuthenticated: boolean,
   user?: User,
   logout: () => void
 };
 
-const AuthContext = createContext<undefined | AuthContextProps>(undefined);
+const AppContext = createContext<undefined | AppContextProps>(undefined);
 
-const AuthProvider = (props: object) => {
+const AppProvider = (props: object) => {
   const {
     getAccessTokenSilently,
     isAuthenticated,
@@ -67,18 +67,18 @@ const AuthProvider = (props: object) => {
     logout
   };
 
-  return <AuthContext.Provider value={value} {...props} />;
+  return <AppContext.Provider value={value} {...props} />;
 };
 
-const useAuth = () => {
-  const context = useContext(AuthContext);
+const useApp = () => {
+  const context = useContext(AppContext);
   if (context === undefined) {
-    throw new Error('useAuth should only be used within the AuthProvider.');
+    throw new Error('useApp should only be used within the AppProvider.');
   }
   return context;
 };
 
 export {
-  AuthProvider,
-  useAuth,
+  AppProvider,
+  useApp,
 };

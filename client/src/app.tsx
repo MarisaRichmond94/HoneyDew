@@ -1,11 +1,11 @@
 import { FC } from 'react';
 
 import { Loading } from 'components';
-import { useAuth } from 'providers';
+import { useApp } from 'providers';
 import { Footer, Header, Router } from 'routes';
 
 const App: FC = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated } = useApp();
 
   if (!isAuthenticated) return <Loading />;
 
