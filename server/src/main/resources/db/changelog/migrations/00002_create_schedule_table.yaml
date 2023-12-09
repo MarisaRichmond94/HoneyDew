@@ -1,0 +1,51 @@
+databaseChangeLog:
+  - changeSet:
+      id: 00002_create_schedule_table_1
+      author: marisarichmond
+      comment: create schedule table
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: schedule
+      changes:
+        - createTable:
+            tableName: schedule
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: schedule_pkey
+              - column:
+                  name: user_id
+                  type: UUID
+                  constraints:
+                    foreignKeyName: fk_user_id
+                    references: users(id)
+                    nullable: false
+              - column:
+                  name: day
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_active
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: time_in_minutes
+                  type: integer
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 00002_create_schedule_table_2
+      author: marisarichmond
+      comment: add unique constraint between day and user id
+      changes:
+        - addUniqueConstraint:
+            constraintName: unique_day_across_user
+            tableName: schedule
+            columnNames: day, user_id

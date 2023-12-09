@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 0001_create_and_populate_user_table_1
+      id: 00001_create_and_populate_user_table_1
       author: marisarichmond
       comment: create users table
       preConditions:
@@ -46,7 +46,7 @@ databaseChangeLog:
                     nullable: false
                     unique: true
   - changeSet:
-      id: 0001_create_and_populate_user_table_2
+      id: 00001_create_and_populate_user_table_2
       author: marisarichmond
       comment: populate users table with test user
       changes:

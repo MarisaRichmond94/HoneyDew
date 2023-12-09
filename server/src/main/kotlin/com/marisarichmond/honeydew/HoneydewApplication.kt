@@ -2,10 +2,12 @@ package com.marisarichmond.honeydew
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
+import org.springframework.validation.annotation.Validated
 
 @SpringBootApplication
-class HoneydewApplication
+@Validated
+class HoneyDewApplication
 
 fun main(args: Array<String>) {
-	runApplication<HoneydewApplication>(*args)
+	runApplication<HoneyDewApplication>(*args)
 }
