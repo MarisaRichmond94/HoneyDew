@@ -8,7 +8,7 @@ import { TbTargetArrow } from 'react-icons/tb';
 import { useLocation, useNavigate } from 'react-router';
 
 import HDButton, { ButtonSize, ButtonType } from 'components/button';
-import { useApp } from 'providers';
+import { useAuth } from 'providers';
 import { ROUTES } from 'settings';
 
 interface NavButtonProps extends PropsWithChildren {
@@ -35,7 +35,7 @@ const NavButton: FC<NavButtonProps> = ({ children, description, route }) => {
 };
 
 const Footer = () => {
-  const { user } = useApp();
+  const { user } = useAuth();
 
   return (
     <div id='app-footer'>
