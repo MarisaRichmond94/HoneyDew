@@ -18,6 +18,7 @@ data class User(
     val email: String,
     val avatar: String,
     val googleId: String,
+    val points: Long = 0,
 
     @Transient
     val schedule: Map<Day, DayDto>? = emptyMap(),
@@ -29,5 +30,6 @@ data class User(
         "email = $email",
         "avatar = $avatar",
         "googleId = $googleId",
+        "points = $points",
     ).joinToString(", ")
 }

@@ -10,9 +10,10 @@ declare global {
 
   interface User {
     id: string,
+    avatar: string,
     firstName: string,
     lastName: string,
-    avatar: string,
+    points: number,
     schedule: Schedule,
   };
 };

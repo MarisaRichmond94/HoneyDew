@@ -45,6 +45,12 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                     unique: true
+              - column:
+                  name: points
+                  type: bigint
+                  defaultValue: 0
+                  constraints:
+                    nullable: false
   - changeSet:
       id: 00001_create_and_populate_user_table_2
       author: marisarichmond
@@ -52,11 +58,11 @@ databaseChangeLog:
       changes:
         - loadData:
             file: data/user.csv
+            relativeToChangelogFile: true
             encoding: UTF-8
             quotChar: '"'
             separator: ;
             tableName: users
-            relativeToChangelogFile: true
             columns:
               - column:
                   header: id
