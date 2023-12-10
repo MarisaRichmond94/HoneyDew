@@ -1,4 +1,2 @@
-import HDButton from "./button";
-
-export default HDButton;
+export * from './button';
 export { ButtonSize, ButtonType } from './button.types';

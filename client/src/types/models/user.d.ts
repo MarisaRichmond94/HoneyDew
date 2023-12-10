@@ -13,9 +13,7 @@ declare global {
     firstName: string,
     lastName: string,
     avatar: string,
-    email: string,
-    points: number,
-    updatedAt: string,
+    schedule: Schedule,
   };
 };
 

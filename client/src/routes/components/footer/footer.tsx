@@ -7,7 +7,7 @@ import { PiStackFill } from 'react-icons/pi';
 import { TbTargetArrow } from 'react-icons/tb';
 import { useLocation, useNavigate } from 'react-router';
 
-import HDButton, { ButtonSize, ButtonType } from 'components/button';
+import { ButtonSize, ButtonType, HDButton } from 'components';
 import { useUser } from 'providers';
 import { ROUTES } from 'settings';
 

@@ -15,7 +15,7 @@ interface HDButtonProps extends PropsWithChildren {
   type?: ButtonType,
 };
 
-const HDButton: FC<HDButtonProps> = ({
+export const HDButton: FC<HDButtonProps> = ({
   children,
   onClick,
 
@@ -39,5 +39,3 @@ const HDButton: FC<HDButtonProps> = ({
     {children}
   </button>
 );
-
-export default HDButton;

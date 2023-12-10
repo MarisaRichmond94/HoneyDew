@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 const DailyDewsPage: FC = () => (
-    <div id='daily-dews-page'>
+    <div id='daily-dews-page' className='page'>
       Daily Dews
     </div>
   );

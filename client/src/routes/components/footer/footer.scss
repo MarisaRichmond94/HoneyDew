@@ -9,7 +9,7 @@
   #nav-container {
     @include vertically-centered-flex-box;
     justify-content: space-around;
-    padding: 0 $padding-10;
+    margin: 0 $margin-15;
   };
 
   .nav-button {
@@ -25,9 +25,7 @@
     };
 
     &.active {
-      border-top: solid;
-      border-top-color: $tertiary-blue;
-      border-top-width: 3px;
+      border-top: solid 3px $tertiary-blue;
     };
 
     .nav-description {

@@ -1,0 +1,9 @@
+@import 'global.scss';
+
+.page-header {
+  border-bottom: 3px solid $tertiary-blue;
+  color: $off-white;
+  font-size: $header-font-size;
+  padding-bottom: $padding-10;
+  text-align: center;
+};
