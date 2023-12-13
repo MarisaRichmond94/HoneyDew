@@ -8,13 +8,25 @@ declare global {
     updatedAt: string | undefined,
   };
 
+  interface UserDto {
+    id: string,
+    avatar: string,
+    firstName: string,
+    lastName: string,
+    points: number,
+
+    assignedChores: AssignedChore[],
+    dailyChores: DailyChore[],
+    rooms: Room[],
+    schedule: Schedule,
+  };
+
   interface User {
     id: string,
     avatar: string,
     firstName: string,
     lastName: string,
     points: number,
-    schedule: Schedule,
   };
 };
 

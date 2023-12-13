@@ -6,7 +6,10 @@ import * as UsersApi from 'api/users';
 import { Day } from 'enums';
 
 interface UserContextProps {
+  assignedChores?: AssignedChore[],
+  dailyChores?: DailyChore[],
   isScheduleLoaded: boolean,
+  rooms?: Room[],
   schedule?: Schedule,
   user?: User,
 
@@ -21,15 +24,21 @@ const UserProvider = (props: object) => {
     user: googleUser,
   } = useAuth0();
 
-  const [user, setUser] = useState<undefined | User>();
+  const [assignedChores, setAssignedChores] = useState<undefined | AssignedChore[]>();
+  const [dailyChores, setDailyChores] = useState<undefined | DailyChore[]>();
+  const [rooms, setRooms] = useState<undefined | Room[]>();
   const [schedule, setSchedule] = useState<undefined | Schedule>();
+  const [user, setUser] = useState<undefined | User>();
 
   useEffect(() => {
     const refreshUser = async (userDto: FindOrCreateUserDTO) => {
-      const refreshedUser = await UsersApi.findOrCreate(userDto, getAccessTokenSilently, setUser);
+      const refreshedUser = await UsersApi.findOrCreate(userDto, getAccessTokenSilently);
       // Fake latency so we can see our beautiful loading spinner
       setTimeout(() => {
         setUser(refreshedUser);
+        setAssignedChores(refreshedUser.assignedChores);
+        setDailyChores(refreshedUser.dailyChores);
+        setRooms(refreshedUser.rooms);
         setSchedule(refreshedUser.schedule);
       }, 2000);
     };
@@ -61,7 +70,10 @@ const UserProvider = (props: object) => {
   };
 
   const value = {
+    assignedChores,
+    dailyChores,
     isScheduleLoaded: !!schedule,
+    rooms,
     schedule,
     user,
 

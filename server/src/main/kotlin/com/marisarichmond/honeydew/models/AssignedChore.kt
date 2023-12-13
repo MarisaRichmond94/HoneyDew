@@ -10,7 +10,7 @@ data class AssignedChore(
     @Id
     override val id: UUID = UUID.randomUUID(),
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     val user: User,
 

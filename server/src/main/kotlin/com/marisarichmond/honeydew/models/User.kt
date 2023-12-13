@@ -8,21 +8,45 @@ import kotlin.jvm.Transient
 
 @Entity
 @Table(name = "users")
+@NamedEntityGraph(
+    name = "UserResponseDtoGraph",
+    attributeNodes = [
+        NamedAttributeNode(
+            value = "assignedChores",
+            subgraph = "assignedChores.subgraph",
+        ),
+        NamedAttributeNode(
+            value = "dailyChores",
+            subgraph = "dailyChores.subgraph",
+        ),
+        NamedAttributeNode("rooms"),
+    ],
+    subgraphs = [
+        NamedSubgraph(
+            name = "assignedChores.subgraph",
+            attributeNodes = [NamedAttributeNode("chore")]
+        ),
+        NamedSubgraph(
+            name = "dailyChores.subgraph",
+            attributeNodes = [NamedAttributeNode("chore")]
+        )
+    ],
+)
 data class User(
     @Id
     override val id: UUID = UUID.randomUUID(),
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    val rooms: List<Room> = emptyList(),
+    val assignedChores: Set<AssignedChore> = emptySet(),
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    val daySchedules: List<DaySchedule> = emptyList(),
+    val dailyChores: Set<DailyChore> = emptySet(),
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    val dailyChores: List<DailyChore> = emptyList(),
+    val daySchedules: Set<DaySchedule> = emptySet(),
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    val assignedChores: List<AssignedChore> = emptyList(),
+    val rooms: Set<Room> = emptySet(),
 
     val firstName: String,
     val lastName: String,
