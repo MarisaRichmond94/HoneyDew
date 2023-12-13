@@ -9,7 +9,7 @@ import javax.transaction.Transactional
 
 @Service
 class UserService(
-    private val scheduleService: ScheduleService,
+    private val dayScheduleService: DayScheduleService,
     private val userRepository: UserRepository,
 ) {
     @Transactional
@@ -22,6 +22,6 @@ class UserService(
             googleId = googleId,
         )
         userRepository.save(user)
-        user.copy(schedule = scheduleService.findOrCreateSchedule(user))
+        user.copy(schedule = dayScheduleService.findOrCreateSchedule(user))
     }
 }

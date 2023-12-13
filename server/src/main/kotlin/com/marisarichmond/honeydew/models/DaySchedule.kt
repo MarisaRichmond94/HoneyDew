@@ -18,8 +18,8 @@ enum class Day {
 }
 
 @Entity
-@Table(name = "schedule")
-data class Schedule(
+@Table(name = "day_schedule")
+data class DaySchedule(
     @Id
     override val id: UUID = UUID.randomUUID(),
     @ManyToOne

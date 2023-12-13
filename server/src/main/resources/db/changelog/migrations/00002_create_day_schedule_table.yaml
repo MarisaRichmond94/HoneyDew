@@ -1,23 +1,23 @@
 databaseChangeLog:
   - changeSet:
-      id: 00002_create_schedule_table_1
+      id: 00002_create_day_schedule_table_1
       author: marisarichmond
-      comment: create schedule table
+      comment: create day_schedule table
       preConditions:
         - onFail: MARK_RAN
         - not:
             - tableExists:
-                tableName: schedule
+                tableName: day_schedule
       changes:
         - createTable:
-            tableName: schedule
+            tableName: day_schedule
             columns:
               - column:
                   name: id
                   type: UUID
                   constraints:
                     primaryKey: true
-                    primaryKeyName: schedule_pkey
+                    primaryKeyName: day_schedule_pkey
               - column:
                   name: user_id
                   type: UUID
@@ -41,11 +41,11 @@ databaseChangeLog:
                   constraints:
                     nullable: false
   - changeSet:
-      id: 00002_create_schedule_table_2
+      id: 00002_create_day_schedule_table_2
       author: marisarichmond
       comment: add unique constraint between day and user id
       changes:
         - addUniqueConstraint:
             constraintName: unique_day_across_user
-            tableName: schedule
+            tableName: day_schedule
             columnNames: day, user_id

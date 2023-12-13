@@ -16,7 +16,7 @@ data class User(
     val rooms: List<Room> = emptyList(),
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    val days: List<Schedule> = emptyList(),
+    val daySchedules: List<DaySchedule> = emptyList(),
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     val dailyChores: List<DailyChore> = emptyList(),

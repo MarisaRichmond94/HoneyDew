@@ -1,8 +1,8 @@
 package com.marisarichmond.honeydew.controllers
 
 import com.marisarichmond.honeydew.models.dtos.DayDto
-import com.marisarichmond.honeydew.models.dtos.UpdateScheduleDto
-import com.marisarichmond.honeydew.services.ScheduleService
+import com.marisarichmond.honeydew.models.dtos.UpdateDayScheduleDto
+import com.marisarichmond.honeydew.services.DayScheduleService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.validation.annotation.Validated
@@ -14,18 +14,18 @@ import javax.validation.Valid
 @RestController
 @RequestMapping("/api/private/schedule")
 @Validated
-class ScheduleController(private val scheduleService: ScheduleService) {
+class DayScheduleController(private val dayScheduleService: DayScheduleService) {
     @ResponseBody
     @PatchMapping("/{id}")
-    fun updateSchedule(
+    fun updateDaySchedule(
         @PathVariable
         id: UUID,
 
         @RequestBody
         @Valid
-        body: UpdateScheduleDto,
+        body: UpdateDayScheduleDto,
     ): ResponseEntity<DayDto> = ResponseEntity.status(HttpStatus.ACCEPTED).body(
-        scheduleService.updateSchedule(
+        dayScheduleService.updateDaySchedule(
             id = id,
             isActive = body.isActive,
             timeInMinutes = body.timeInMinutes,

@@ -3,7 +3,7 @@ package com.marisarichmond.honeydew.models.dtos
 import javax.validation.constraints.NotNull
 import javax.validation.constraints.Positive
 
-data class UpdateScheduleDto(
+data class UpdateDayScheduleDto(
     @NotNull(message = "isActive is a required field")
     val isActive: Boolean,
 
