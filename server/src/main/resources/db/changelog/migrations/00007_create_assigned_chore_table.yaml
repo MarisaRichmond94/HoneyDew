@@ -1,0 +1,58 @@
+databaseChangeLog:
+  - changeSet:
+      id: 00007_create_assigned_chore_table_1
+      author: marisarichmond
+      comment: create assigned_chore table
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: assigned_chore
+      changes:
+        - createTable:
+            tableName: assigned_chore
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: assigned_chore_pkey
+              - column:
+                  name: user_id
+                  type: UUID
+                  constraints:
+                    foreignKeyName: fk_user_id
+                    references: users(id)
+                    nullable: false
+              - column:
+                  name: chore_id
+                  type: UUID
+                  constraints:
+                    foreignKeyName: fk_chore_id
+                    references: chore(id)
+                    nullable: false
+              - column:
+                  name: assigned_at
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_complete
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_archived
+                  type: boolean
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 00007_create_assigned_chore_table_2
+      author: marisarichmond
+      comment: add unique constraint between chore and assigned at
+      changes:
+        - addUniqueConstraint:
+            constraintName: unique_assigned_at_chore
+            tableName: assigned_chore
+            columnNames: assigned_at, chore_id

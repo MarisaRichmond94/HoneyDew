@@ -8,6 +8,7 @@ import javax.persistence.*
 data class Room(
     @Id
     override val id: UUID = UUID.randomUUID(),
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     val user: User,

@@ -21,6 +21,9 @@ data class User(
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     val dailyChores: List<DailyChore> = emptyList(),
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    val assignedChores: List<AssignedChore> = emptyList(),
+
     val firstName: String,
     val lastName: String,
     val email: String,
