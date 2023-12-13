@@ -23,7 +23,7 @@ data class User(
     @Transient
     val schedule: Map<Day, DayDto>? = emptyMap(),
 ) : Base(id) {
-    override fun toString() = this::class.simpleName + listOf(
+    override fun toString() = this::class.simpleName + "(" + listOf(
         "id = $id",
         "firstName = $firstName",
         "lastName = $lastName",
@@ -31,5 +31,5 @@ data class User(
         "avatar = $avatar",
         "googleId = $googleId",
         "points = $points",
-    ).joinToString(", ")
+    ).joinToString(", ") + ")"
 }

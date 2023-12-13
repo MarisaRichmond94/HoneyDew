@@ -30,10 +30,10 @@ data class Schedule(
     val isActive: Boolean = false,
     val timeInMinutes: Long = 0,
 ) : Base(id) {
-    override fun toString() = this::class.simpleName + listOf(
+    override fun toString() = this::class.simpleName + "(" + listOf(
         "id = $id",
         "day = $day",
         "isActive = $isActive",
         "timeInMinutes = $timeInMinutes"
-    )
+    ).joinToString(", ") + ")"
 }

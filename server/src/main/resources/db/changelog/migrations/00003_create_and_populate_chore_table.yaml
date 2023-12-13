@@ -1,0 +1,45 @@
+databaseChangeLog:
+  - changeSet:
+      id: 00003_create_and_populate_chore_table_1
+      author: marisarichmond
+      comment: create chore table
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: chore
+      changes:
+        - createTable:
+            tableName: chore
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: chore_pkey
+              - column:
+                  name: name
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar
+                  constraints:
+                    nullable: true
+              - column:
+                  name: priority
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: time_in_minutes
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: cooldown_in_days
+                  type: bigint
+                  constraints:
+                    nullable: false
