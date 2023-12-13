@@ -1,0 +1,41 @@
+databaseChangeLog:
+  - changeSet:
+      id: 00004_create_room_table_1
+      author: marisarichmond
+      comment: create room table
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: room
+      changes:
+        - createTable:
+            tableName: room
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: room_pkey
+              - column:
+                  name: user_id
+                  type: UUID
+                  constraints:
+                    foreignKeyName: fk_user_id
+                    references: users(id)
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 00004_create_room_table_2
+      author: marisarichmond
+      comment: add unique constraint between name and user id
+      changes:
+        - addUniqueConstraint:
+            constraintName: unique_name_across_user
+            tableName: room
+            columnNames: name, user_id

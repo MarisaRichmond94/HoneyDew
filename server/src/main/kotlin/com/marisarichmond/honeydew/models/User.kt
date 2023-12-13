@@ -2,9 +2,8 @@ package com.marisarichmond.honeydew.models
 
 import com.marisarichmond.honeydew.models.dtos.DayDto
 import java.util.*
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.Table
+import javax.persistence.*
+import kotlin.jvm.Transient
 
 
 @Entity
@@ -12,6 +11,12 @@ import javax.persistence.Table
 data class User(
     @Id
     override val id: UUID = UUID.randomUUID(),
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    val rooms: List<Room> = emptyList(),
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    val days: List<Schedule> = emptyList(),
 
     val firstName: String,
     val lastName: String,
