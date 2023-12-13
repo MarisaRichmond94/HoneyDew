@@ -1,0 +1,34 @@
+databaseChangeLog:
+  - changeSet:
+      id: 00006_create_room_chore_table_1
+      author: marisarichmond
+      comment: create room_chore table
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: room_chore
+      changes:
+        - createTable:
+            tableName: room_chore
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: room_chore_pkey
+              - column:
+                  name: room_id
+                  type: UUID
+                  constraints:
+                    foreignKeyName: fk_room_id
+                    references: room(id)
+                    nullable: false
+              - column:
+                  name: chore_id
+                  type: UUID
+                  constraints:
+                    foreignKeyName: fk_chore_id
+                    references: chore(id)
+                    nullable: false
