@@ -1,0 +1,37 @@
+databaseChangeLog:
+  - changeSet:
+      id: 00008_create_activity_log_table_1
+      author: marisarichmond
+      comment: create activity_log table
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: activity_log
+      changes:
+        - createTable:
+            tableName: activity_log
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: activity_log_pkey
+              - column:
+                  name: user_id
+                  type: UUID
+                  constraints:
+                    foreignKeyName: fk_user_id
+                    references: users(id)
+                    nullable: false
+              - column:
+                  name: activity
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: logged_at
+                  type: bigint
+                  constraints:
+                    nullable: false

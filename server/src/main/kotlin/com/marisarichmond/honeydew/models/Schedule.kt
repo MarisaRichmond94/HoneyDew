@@ -34,6 +34,7 @@ data class Schedule(
         "id = $id",
         "day = $day",
         "isActive = $isActive",
-        "timeInMinutes = $timeInMinutes"
+        "timeInMinutes = $timeInMinutes",
+        "user = <LAZY>",
     ).joinToString(", ") + ")"
 }
