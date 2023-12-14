@@ -2,16 +2,17 @@ import './PlanPage.scss';
 
 import { Dispatch, FC, SetStateAction, useState } from 'react';
 import { BsArrowReturnLeft } from 'react-icons/bs';
-import { LuMinus, LuPlus } from 'react-icons/lu';
 import { FiEdit } from 'react-icons/fi';
+import { LuMinus, LuPlus } from 'react-icons/lu';
 
-import { ButtonSize, ButtonType, HDButton, Loading, PageHeader, ToggleButton } from 'components';
-import { Day } from 'enums';
-import { useUser } from 'providers';
-import { toDay } from 'routes/utils';
 import happyMelon from 'assets/melon/happy_melon.png';
 import sadMelon from 'assets/melon/sad_melon.png';
 import surprisedMelon from 'assets/melon/surprised_melon.png';
+import { ButtonSize, ButtonType, HDButton, Loading, PageHeader, ToggleButton } from 'components';
+import { Day } from 'enums';
+import { useUser } from 'providers';
+import { ActionButton } from 'routes/components';
+import { toDay } from 'routes/utils';
 
 const PlanPage: FC = () => {
   const { isScheduleLoaded } = useUser();
@@ -133,47 +134,43 @@ const DayView: FC<DayViewProps> = ({ activeDay, setActiveDay }) => {
   const { melon, quality } = getAssets(daySchedule.timeInMinutes);
 
   return (
-    <div id='day-view'>
+    <div className='page-content'>
       <PageHeader headerText={activeDay.toString()} />
-      <div id='time-editor-container'>
-        <HDButton
-          classNames={['time-button', 'off-white']}
-          isDisabled={daySchedule.timeInMinutes === 0}
-          onClick={() => updateTimeSchedule(daySchedule.timeInMinutes - 5)}
-          size={ButtonSize.xl}
-          type={ButtonType.icon}
-        >
-          <LuMinus />
-        </HDButton>
-        <div id='time-container'>
-          <div id='time-in-minutes' className={quality}>
-            {daySchedule.timeInMinutes}
+      <div>
+        <div id='time-editor-container'>
+          <HDButton
+            classNames={['time-button', 'off-white']}
+            isDisabled={daySchedule.timeInMinutes === 0}
+            onClick={() => updateTimeSchedule(daySchedule.timeInMinutes - 5)}
+            size={ButtonSize.xl}
+            type={ButtonType.icon}
+          >
+            <LuMinus />
+          </HDButton>
+          <div id='time-container'>
+            <div id='time-in-minutes' className={quality}>
+              {daySchedule.timeInMinutes}
+            </div>
+            <div>Minutes</div>
           </div>
-          <div>Minutes</div>
+          <HDButton
+            classNames={['time-button', 'off-white']}
+            onClick={() => updateTimeSchedule(daySchedule.timeInMinutes + 5)}
+            size={ButtonSize.xl}
+            type={ButtonType.icon}
+          >
+            <LuPlus />
+          </HDButton>
         </div>
-        <HDButton
-          classNames={['time-button', 'off-white']}
-          onClick={() => updateTimeSchedule(daySchedule.timeInMinutes + 5)}
-          size={ButtonSize.xl}
-          type={ButtonType.icon}
-        >
-          <LuPlus />
-        </HDButton>
-      </div>
-      <div id='happy-melon-container'>
-        <img alt='' id='happy-melon' src={melon} />
-        <div>How many minutes in the day will you commit to dewing?</div>
-      </div>
-      <HDButton
-        id='back-button'
-        classNames={['secondary-blue']}
-        onClick={() => setActiveDay(undefined)}
-      >
-        <div id='back-button-content'>
-          <div>Back</div>
-          <BsArrowReturnLeft />
+        <div className='melon-container'>
+          <img alt='' className='melon' src={melon} />
+          <div>How many minutes in the day will you commit to dewing?</div>
         </div>
-      </HDButton>
+      </div>
+      <ActionButton onClick={() => setActiveDay(undefined)}>
+        <div>Back</div>
+        <BsArrowReturnLeft />
+      </ActionButton>
     </div>
   );
 };

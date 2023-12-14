@@ -1,0 +1,22 @@
+@import 'global.scss';
+
+#room-container {
+  max-height: 52vh;
+  overflow: hidden auto;
+};
+
+#rooms-list {
+  .room-container {
+    &:first-of-type {
+      .action-button {
+        margin-top: 0;
+      };
+    };
+
+    &:last-of-type {
+      .action-button {
+        margin-bottom: 0;
+      };
+    };
+  };
+};

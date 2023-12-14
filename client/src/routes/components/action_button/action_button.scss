@@ -1,0 +1,24 @@
+@import 'global.scss';
+
+.action-button {
+  margin-bottom: $margin-15;
+  width: 100%;
+
+  &:first-of-type {
+    margin-top: $margin-15;
+  };
+
+  &.sticky-bottom {
+    bottom: $footer-height;
+    position: absolute !important;
+    left: $margin-15; // 15px to account for 15px margin
+    width: calc(100% - 30px); // -30px to account for 15px margin
+  };
+
+  .action-button-content {
+    @include vertically-centered-flex-box;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  };
+};

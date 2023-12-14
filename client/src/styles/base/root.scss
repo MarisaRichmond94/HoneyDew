@@ -5,6 +5,7 @@ body {
   font-family: 'Cooper Hewitt';
   font-weight: 100;
   margin: $no-margin;
+  overflow: hidden;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
 };

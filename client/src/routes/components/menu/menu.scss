@@ -1,0 +1,13 @@
+@import 'global.scss';
+
+.menu {
+  @include vertically-centered-flex-box;
+
+  &.bottom {
+    border-top: 1px solid $tertiary-blue;
+  };
+
+  &.top {
+    border-bottom: 1px solid $tertiary-blue;
+  };
+};

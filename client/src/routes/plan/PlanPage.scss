@@ -4,8 +4,8 @@
 
   #total-time {
     @include vertically-centered-flex-box;
-
     color: $off-white;
+    padding: 0 $padding-15;
 
     #total-sum-in-minutes {
       margin-left: auto;
@@ -16,18 +16,18 @@
 #day-editor-container {
   display: flex;
   flex-direction: column;
-  gap: $margin-10;
+  gap: $margin-15;
 
   .day-editor {
     @include vertically-centered-flex-box;
 
     border-bottom: 1px solid $tertiary-blue;
     color: $off-white;
-    gap: $margin-10;
-    padding-bottom: $padding-10;
+    gap: $margin-15;
+    padding: 0 $padding-15 $padding-15 $padding-15;
 
     &:first-child {
-      padding-top: $padding-10;
+      padding-top: $padding-15;
     };
 
     .time-in-minutes {
@@ -40,59 +40,27 @@
   };
 };
 
-#day-view {
-  display: flex;
-  flex-direction: column;
+#time-editor-container {
+  @include vertically-centered-flex-box;
 
-  #time-editor-container {
-    @include vertically-centered-flex-box;
+  color: $off-white;
+  justify-content: space-between;
+  margin-bottom: 15%;
 
-    color: $off-white;
-    justify-content: space-between;
-    margin-bottom: 15%;
-
-    #time-container {
-      align-items: center;
-      display: flex;
-      flex-direction: column;
-      gap: $margin-10;
-
-      #time-in-minutes {
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
-        font-weight: bold;
-        font-size: 4rem;
-
-        &.low-quality { color: $primary-red; };
-        &.medium-quality { color: $primary-yellow; };
-        &.high-quality { color: $primary-green; };
-      };
-    };
-  };
-
-  #happy-melon-container {
-    @include vertically-centered-flex-box;
-    color: $off-white;
+  #time-container {
+    align-items: center;
+    display: flex;
     flex-direction: column;
-    gap: $margin-20;
-    padding: 0 10%;
-    text-align: center;
+    gap: $margin-10;
 
-    #happy-melon {
-      width: 75%;
-    };
-  };
+    #time-in-minutes {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      font-weight: bold;
+      font-size: 4rem;
 
-  #back-button {
-    bottom: 120px;
-    position: absolute;
-    left: $margin-15; // 15px to account for 15px margin
-    width: calc(100% - 30px); // -30px to account for 15px margin
-
-    #back-button-content {
-      @include vertically-centered-flex-box;
-      flex-direction: row;
-      justify-content: space-between;
-      width: 100%;
+      &.low-quality { color: $primary-red; };
+      &.medium-quality { color: $primary-yellow; };
+      &.high-quality { color: $primary-green; };
     };
   };
 };

@@ -1,0 +1,13 @@
+.melon-container {
+  align-items: center;
+  color: $off-white;
+  display: flex;
+  flex-direction: column;
+  gap: $margin-20;
+  padding: 0 10%;
+  text-align: center;
+
+  .melon {
+    width: 75%;
+  };
+};
