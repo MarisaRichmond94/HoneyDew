@@ -1,9 +1,10 @@
 import './PlanPage.scss';
 
-import { Dispatch, FC, SetStateAction, useState } from 'react';
+import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import { BsArrowReturnLeft } from 'react-icons/bs';
 import { FiEdit } from 'react-icons/fi';
 import { LuMinus, LuPlus } from 'react-icons/lu';
+import { debounce } from 'throttle-debounce';
 
 import happyMelon from 'assets/melon/happy_melon.png';
 import sadMelon from 'assets/melon/sad_melon.png';
@@ -102,7 +103,7 @@ const DayEditor: FC<DayEditorProps> = ({ day, schedule, setActiveDay }) => {
     <div className='day-editor'>
       <ToggleButton
         hideText
-        onClick={() => onUpdateSchedule()}
+        onClick={onUpdateSchedule}
         selected={schedule.isActive}
       />
       <div className='day'>{day}</div>
@@ -128,11 +129,20 @@ const DayView: FC<DayViewProps> = ({ activeDay, setActiveDay }) => {
   const { schedule, updateSchedule } = useUser();
   const daySchedule = schedule!![activeDay as Day];
 
+  const [minutes, setMinutes] = useState(daySchedule.timeInMinutes);
+
+  const [debouncedUpdateTimeSchedule] = useState(
+    () => debounce(500, (timeInMinutes: number): void => {
+      updateSchedule(activeDay, daySchedule.id, {
+        isActive: daySchedule.isActive,
+        timeInMinutes,
+      });
+    }),
+  );
+
   const updateTimeSchedule = (timeInMinutes: number) => {
-    updateSchedule(activeDay, daySchedule.id, {
-      isActive: daySchedule.isActive,
-      timeInMinutes,
-    });
+    setMinutes(timeInMinutes);
+    debouncedUpdateTimeSchedule(timeInMinutes);
   };
 
   const getAssets = (timeAmount: number): { melon: string, quality: string } => {
@@ -141,7 +151,7 @@ const DayView: FC<DayViewProps> = ({ activeDay, setActiveDay }) => {
     return { melon: surprisedMelon, quality: 'medium-quality' };
   };
 
-  const { melon, quality } = getAssets(daySchedule.timeInMinutes);
+  const { melon, quality } = getAssets(minutes);
 
   return (
     <div className='page-content'>
@@ -150,8 +160,8 @@ const DayView: FC<DayViewProps> = ({ activeDay, setActiveDay }) => {
         <div id='time-editor-container'>
           <HDButton
             classNames={['time-button', 'off-white']}
-            isDisabled={daySchedule.timeInMinutes <= 0}
-            onClick={() => updateTimeSchedule(daySchedule.timeInMinutes - 5)}
+            isDisabled={minutes <= 0}
+            onClick={() => updateTimeSchedule(minutes - 5)}
             size={ButtonSize.xl}
             type={ButtonType.icon}
           >
@@ -159,14 +169,14 @@ const DayView: FC<DayViewProps> = ({ activeDay, setActiveDay }) => {
           </HDButton>
           <div id='time-container'>
             <div id='time-in-minutes' className={quality}>
-              {daySchedule.timeInMinutes}
+              {minutes}
             </div>
             <div>Minutes</div>
           </div>
           <HDButton
             classNames={['time-button', 'off-white']}
-            isDisabled={daySchedule.timeInMinutes >= 1440}
-            onClick={() => updateTimeSchedule(daySchedule.timeInMinutes + 5)}
+            isDisabled={minutes >= 1440}
+            onClick={() => updateTimeSchedule(minutes + 5)}
             size={ButtonSize.xl}
             type={ButtonType.icon}
           >
