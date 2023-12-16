@@ -1,6 +1,6 @@
 import './PlanPage.scss';
 
-import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, FC, SetStateAction, useState } from 'react';
 import { BsArrowReturnLeft } from 'react-icons/bs';
 import { FiEdit } from 'react-icons/fi';
 import { LuMinus, LuPlus } from 'react-icons/lu';

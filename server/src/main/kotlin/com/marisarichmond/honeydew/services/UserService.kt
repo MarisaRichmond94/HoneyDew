@@ -4,6 +4,7 @@ import com.marisarichmond.honeydew.models.User
 import com.marisarichmond.honeydew.models.dtos.CreateUserRequestDto
 import com.marisarichmond.honeydew.repositories.UserRepository
 import org.springframework.stereotype.Service
+import java.util.*
 import javax.transaction.Transactional
 
 
@@ -24,4 +25,6 @@ class UserService(
         userRepository.save(user)
         user.copy(schedule = dayScheduleService.findOrCreateSchedule(user))
     }
+
+    fun getById(id: UUID) = userRepository.getById(id)
 }
