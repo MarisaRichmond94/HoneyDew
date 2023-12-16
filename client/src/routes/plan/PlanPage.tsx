@@ -14,6 +14,16 @@ import { useUser } from 'providers';
 import { ActionButton } from 'routes/components';
 import { toDay } from 'routes/utils';
 
+const DAY_ORDER = [
+  Day.Monday,
+  Day.Tuesday,
+  Day.Wednesday,
+  Day.Thursday,
+  Day.Friday,
+  Day.Saturday,
+  Day.Sunday,
+];
+
 const PlanPage: FC = () => {
   const { isScheduleLoaded } = useUser();
 
@@ -50,11 +60,11 @@ const ScheduleView: FC<ScheduleViewProps> = ({ setActiveDay }) => {
       <PageHeader headerText='Schedule' />
       <div id='day-editor-container'>
         {
-          Object.entries(schedule).map(([day, daySchedule]) => (
+          DAY_ORDER.map((day) => (
             <DayEditor
               key={`day-${day}`}
               day={toDay(day)}
-              schedule={daySchedule}
+              schedule={schedule[day]}
               setActiveDay={setActiveDay}
             />
           ))
@@ -140,7 +150,7 @@ const DayView: FC<DayViewProps> = ({ activeDay, setActiveDay }) => {
         <div id='time-editor-container'>
           <HDButton
             classNames={['time-button', 'off-white']}
-            isDisabled={daySchedule.timeInMinutes === 0}
+            isDisabled={daySchedule.timeInMinutes <= 0}
             onClick={() => updateTimeSchedule(daySchedule.timeInMinutes - 5)}
             size={ButtonSize.xl}
             type={ButtonType.icon}
@@ -155,6 +165,7 @@ const DayView: FC<DayViewProps> = ({ activeDay, setActiveDay }) => {
           </div>
           <HDButton
             classNames={['time-button', 'off-white']}
+            isDisabled={daySchedule.timeInMinutes >= 1440}
             onClick={() => updateTimeSchedule(daySchedule.timeInMinutes + 5)}
             size={ButtonSize.xl}
             type={ButtonType.icon}
