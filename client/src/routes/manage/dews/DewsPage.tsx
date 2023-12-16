@@ -33,7 +33,7 @@ const DewsPage: FC = () => {
             </ActionButton>
           </Menu>
         </div>
-        <div id='dew-container'>
+        <div id={dews.length === 0 ? 'empty-dew-container' : 'dew-container'}>
           {dewContent}
         </div>
         <Menu type={MenuType.bottom}>

@@ -33,7 +33,7 @@ const RoomsPage: FC = () => {
             </ActionButton>
           </Menu>
         </div>
-        <div id='room-container'>
+        <div id={rooms.length === 0 ? 'empty-room-container' : 'room-container'}>
           {roomContent}
         </div>
         <Menu type={MenuType.bottom}>
