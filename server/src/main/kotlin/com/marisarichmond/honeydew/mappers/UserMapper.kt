@@ -8,8 +8,9 @@ fun toUserResponseDto(user: User): UserResponseDto = UserResponseDto(
     firstName = user.firstName,
     lastName = user.lastName,
     avatar = user.avatar,
-    schedule = user.schedule!!,
-    rooms = user.rooms,
-    dailyChores = user.dailyChores,
     assignedChores = user.assignedChores,
+    dailyChores = user.dailyChores,
+    dews = user.userChores.map { it.chore }.toSet(),
+    rooms = user.rooms,
+    schedule = user.schedule!!,
 )

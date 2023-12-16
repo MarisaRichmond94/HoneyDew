@@ -23,7 +23,7 @@ data class Chore(
     val description: String? = null,
     val timeInMinutes: Long,
     val priority: ChorePriority,
-    val cooldownInDays: Long,
+    val coolDownInDays: Long,
 ) : Base(id) {
     override fun toString() = this::class.simpleName + "(" + listOf(
         "id = $id",
@@ -31,6 +31,6 @@ data class Chore(
         "description = $description",
         "timeInMinutes = $timeInMinutes",
         "priority = $priority",
-        "cooldownInDays = $cooldownInDays",
+        "coolDownInDays = $coolDownInDays",
     ).joinToString(", ") + ")"
 }

@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 00003_create_and_populate_chore_table_1
+      id: 00003_create_chore_table_1
       author: marisarichmond
       comment: create chore table
       preConditions:
@@ -25,7 +25,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: description
-                  type: varchar
+                  type: text
                   constraints:
                     nullable: true
               - column:
@@ -39,7 +39,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: cooldown_in_days
+                  name: cool_down_in_days
                   type: bigint
                   constraints:
                     nullable: false

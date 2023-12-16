@@ -20,6 +20,10 @@ import kotlin.jvm.Transient
             subgraph = "dailyChores.subgraph",
         ),
         NamedAttributeNode("rooms"),
+        NamedAttributeNode(
+            value = "userChores",
+            subgraph = "userChores.subgraph",
+        )
     ],
     subgraphs = [
         NamedSubgraph(
@@ -29,7 +33,11 @@ import kotlin.jvm.Transient
         NamedSubgraph(
             name = "dailyChores.subgraph",
             attributeNodes = [NamedAttributeNode("chore")]
-        )
+        ),
+        NamedSubgraph(
+            name = "userChores.subgraph",
+            attributeNodes = [NamedAttributeNode("chore")],
+        ),
     ],
 )
 data class User(
@@ -47,6 +55,9 @@ data class User(
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     val rooms: Set<Room> = emptySet(),
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    val userChores: Set<UserChore> = emptySet(),
 
     val firstName: String,
     val lastName: String,

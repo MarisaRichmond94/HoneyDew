@@ -17,6 +17,7 @@ declare global {
 
     assignedChores: AssignedChore[],
     dailyChores: DailyChore[],
+    dews: Dew[],
     rooms: Room[],
     schedule: Schedule,
   };

@@ -8,6 +8,7 @@ import { Day } from 'enums';
 interface UserContextProps {
   assignedChores?: AssignedChore[],
   dailyChores?: DailyChore[],
+  dews?: Dew[],
   isScheduleLoaded: boolean,
   rooms?: Room[],
   schedule?: Schedule,
@@ -26,6 +27,7 @@ const UserProvider = (props: object) => {
 
   const [assignedChores, setAssignedChores] = useState<undefined | AssignedChore[]>();
   const [dailyChores, setDailyChores] = useState<undefined | DailyChore[]>();
+  const [dews, setDews] = useState<undefined | Dew[]>();
   const [rooms, setRooms] = useState<undefined | Room[]>();
   const [schedule, setSchedule] = useState<undefined | Schedule>();
   const [user, setUser] = useState<undefined | User>();
@@ -38,6 +40,7 @@ const UserProvider = (props: object) => {
         setUser(refreshedUser);
         setAssignedChores(refreshedUser.assignedChores);
         setDailyChores(refreshedUser.dailyChores);
+        setDews(refreshedUser.dews);
         setRooms(refreshedUser.rooms);
         setSchedule(refreshedUser.schedule);
       }, 2000);
@@ -72,6 +75,7 @@ const UserProvider = (props: object) => {
   const value = {
     assignedChores,
     dailyChores,
+    dews,
     isScheduleLoaded: !!schedule,
     rooms,
     schedule,

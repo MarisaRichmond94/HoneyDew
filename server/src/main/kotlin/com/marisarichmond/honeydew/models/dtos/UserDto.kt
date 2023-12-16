@@ -1,9 +1,6 @@
 package com.marisarichmond.honeydew.models.dtos
 
-import com.marisarichmond.honeydew.models.AssignedChore
-import com.marisarichmond.honeydew.models.DailyChore
-import com.marisarichmond.honeydew.models.Day
-import com.marisarichmond.honeydew.models.Room
+import com.marisarichmond.honeydew.models.*
 import java.util.UUID
 
 data class CreateUserRequestDto(
@@ -19,8 +16,9 @@ data class UserResponseDto(
     val firstName: String,
     val lastName: String,
     val avatar: String,
-    val schedule: Map<Day, DayDto>,
-    val rooms: Set<Room>,
-    val dailyChores: Set<DailyChore>,
     val assignedChores: Set<AssignedChore>,
+    val dailyChores: Set<DailyChore>,
+    val dews: Set<Chore>,
+    val rooms: Set<Room>,
+    val schedule: Map<Day, DayDto>,
 )

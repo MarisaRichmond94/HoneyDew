@@ -1,0 +1,34 @@
+databaseChangeLog:
+  - changeSet:
+      id: 00009_create_user_chore_table_1
+      author: marisarichmond
+      comment: create user_chore table
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: user_chore
+      changes:
+        - createTable:
+            tableName: user_chore
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: user_chore_pkey
+              - column:
+                  name: user_id
+                  type: UUID
+                  constraints:
+                    foreignKeyName: fk_user_id
+                    references: users(id)
+                    nullable: false
+              - column:
+                  name: chore_id
+                  type: UUID
+                  constraints:
+                    foreignKeyName: fk_chore_id
+                    references: chore(id)
+                    nullable: false
