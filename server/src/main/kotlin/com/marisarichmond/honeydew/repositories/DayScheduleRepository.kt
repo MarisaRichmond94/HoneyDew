@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository
 import java.util.*
 
 @Repository
-interface DayScheduleRepository : JpaRepository<DaySchedule, Long> {
+interface DayScheduleRepository : JpaRepository<DaySchedule, UUID> {
     fun findById(id: UUID): DaySchedule?
     fun findAllByUserId(userId: UUID): List<DaySchedule>
 }
